@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="234.0" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="robot7.FXMLDocumentController">
+   <children>
+      <MenuBar prefHeight="29.0" prefWidth="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="mIfileOpen" onAction="#handleFileOpenAction" text="_Open" />
+              <MenuItem fx:id="closeItem" mnemonicParsing="false" onAction="#systemClose" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem fx:id="mIgetPoint" mnemonicParsing="false" onAction="#getMouseClickPoint" text="Click Point" />
+                  <MenuItem fx:id="mIclear" mnemonicParsing="false" onAction="#clearItems" text="表削除" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TableView fx:id="tVdata" layoutX="7.0" layoutY="29.0" prefHeight="162.0" prefWidth="320.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+        <columns>
+            <TableColumn fx:id="tClineNumber" prefWidth="75.0" text="Number" />
+          <TableColumn fx:id="tCpassFlag" prefWidth="75.0" text="P/F" />
+          <TableColumn fx:id="tCtext" prefWidth="169.0" text="TEXT" />
+        </columns>
+      </TableView>
+      <Label layoutX="11.0" layoutY="202.0" text="X" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="11.0" />
+      <TextField fx:id="tFPointX" layoutX="18.0" layoutY="197.0" prefHeight="28.0" prefWidth="56.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="18.0" />
+      <Label layoutX="85.0" layoutY="202.0" text="Y" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="85.0" />
+      <TextField fx:id="tFPointY" layoutX="92.0" layoutY="197.0" prefHeight="28.0" prefWidth="56.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="92.0" />
+      <Button fx:id="btnSendToNext" layoutX="216.0" layoutY="197.0" mnemonicParsing="false" onAction="#handleSendToNextAction" prefHeight="28.0" prefWidth="84.0" text="SendToNext" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="8.0" />
+      <CheckBox fx:id="chbEnter" layoutX="160.0" layoutY="202.0" mnemonicParsing="false" text="+ENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="97.0" />
+   </children>
+</AnchorPane>
