@@ -150,13 +150,14 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("Selectded now " + i);
         Mouse.mouseClick(Integer.parseInt(this.gettFPointX().getText()),
                 Integer.parseInt(this.gettFPointY().getText()));
-
+/*
         try {
+  
             //Keyboard keyboard = new Keyboard();
             String typingLetter;
             if (chbEnter.isSelected()) { // with enter.
                 typingLetter = tVdata.getSelectionModel().getSelectedItem().getText()
-                        .concat(System.lineSeparator());
+                        .concat("\n");
             } else { // no enter.
                 typingLetter = tVdata.getSelectionModel().getSelectedItem().getText();
             }
@@ -164,7 +165,7 @@ public class FXMLDocumentController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+*/
         // const now
         //((Stage) this.anchorPane.getScene().getWindow()).hide();
         FXMLLoader fxmlLoader = new FXMLLoader(
@@ -198,6 +199,7 @@ public class FXMLDocumentController implements Initializable {
                 MsgBox.plain(typingLetter);
             } else { // Will type.
                 try {
+                    System.out.println("これからタイプ"+typingLetter);
                     this.FXMLRobotGrandPanelController.doTyping(typingLetter);
                 } catch (Exception ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -242,20 +244,23 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     void readText(Path path) {
         try {
+            // List<String> lines = Files.lines(path).collect(Collectors.toList());
             List<String> lines = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.toList());
             for (int i = 0; i < lines.size(); i++) {
                 data.addAll(new Member(i + 1, "N/T", lines.get(i)));
             }
+            /*
             if (lines.stream().anyMatch(pipe -> pipe.indexOf("|") > 0)) {
                 System.out.println("Inc |");
             }
             lines.forEach(l -> {
-                if (Stream.of(l).anyMatch(p -> p.equals("o"))) {
-                    System.out.println("Inc |");
+                if (Stream.of(l).anyMatch(p -> p.equals("_"))) {
+                    System.out.println("Inc _");
                 };
                 System.out.println(l);
 
             });
+*/
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }

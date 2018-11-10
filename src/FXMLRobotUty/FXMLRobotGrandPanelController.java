@@ -381,7 +381,8 @@ public class FXMLRobotGrandPanelController implements Initializable {
                 doType(VK_SPACE);
                 break;
             default:
-                //MsgBox.error("Cannot type character " + character);
+                System.out.println("now "+ String.valueOf(character));
+                MsgBox.error("Cannot type character " + character);
                 throw new IllegalArgumentException("Cannot type character " + character);
         }
     }
@@ -397,6 +398,7 @@ public class FXMLRobotGrandPanelController implements Initializable {
         if (keyCodes[offset] == VK_UNDERSCORE) { // '_' for Windows robot.delay(1000); JOptionPane.showMessageDialog(null, "Press the [_] key => press the Ok button => click window"); // Key with hand. robot.delay(3000); } else { robot.keyPress(keyCodes[offset]); doType(keyCodes, offset + 1, length - 1); robot.keyRelease(keyCodes[offset]); } */ if (keyCodes[offset] == VK_UNDERSCORE) {
             System.out.println("Type UNDERSCORE '_' !");
             //MsgBox.info("およそ" + (offset + 1) + " ステップ目に _ があり、行末改行は無効化されます。");
+            keyCodes[offset] = VK_AT;
             this.dontPushEnter = true;
         }
         if (keyCodes[offset] == 16 && keyCodes[offset + 1] == 92) {
@@ -408,7 +410,7 @@ public class FXMLRobotGrandPanelController implements Initializable {
                 && this.dontPushEnter == true) {
             MsgBox.info("文中に'_'または'|'が含まれてたため、行末改行を無効化しました。"
                     + System.lineSeparator()
-                    + "文字の欠損に注意して手動で改行してください。");
+                    + "'_'は'@'に置換しています。文字の欠損に注意して手動で改行してください。");
             return; // End of type when with in not typeable caractor.
         }
         System.out.println("Keyode = " + keyCodes[offset]);
