@@ -11,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="234.0" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="robot7.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="234.0" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="robot7.FXMLDocumentController">
    <children>
       <MenuBar prefHeight="29.0" prefWidth="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -45,7 +45,7 @@
       <TextField fx:id="tFPointX" layoutX="18.0" layoutY="197.0" prefHeight="28.0" prefWidth="56.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="18.0" />
       <Label layoutX="85.0" layoutY="202.0" text="Y" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="85.0" />
       <TextField fx:id="tFPointY" layoutX="92.0" layoutY="197.0" prefHeight="28.0" prefWidth="56.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="92.0" />
-      <Button fx:id="btnSendToNext" layoutX="216.0" layoutY="197.0" mnemonicParsing="false" onAction="#handleSendToNextAction" prefHeight="28.0" prefWidth="84.0" text="SendToNext" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="8.0" />
+      <Button fx:id="btnSendToNext" layoutX="235.0" layoutY="197.0" mnemonicParsing="false" onAction="#handleSendToNextAction" prefHeight="28.0" prefWidth="85.0" text="SendToNext" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="9.0" />
       <CheckBox fx:id="chbEnter" layoutX="160.0" layoutY="202.0" mnemonicParsing="false" text="+ENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="97.0" />
    </children>
 </AnchorPane>

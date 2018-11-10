@@ -27,6 +27,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -49,6 +50,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -88,6 +90,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     //private File text;
+    @FXML
+    private Label lbType;
+
     @FXML
     private AnchorPane anchorPane;
 
@@ -150,7 +155,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("Selectded now " + i);
         Mouse.mouseClick(Integer.parseInt(this.gettFPointX().getText()),
                 Integer.parseInt(this.gettFPointY().getText()));
-/*
+        /*
         try {
   
             //Keyboard keyboard = new Keyboard();
@@ -165,7 +170,7 @@ public class FXMLDocumentController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/
+         */
         // const now
         //((Stage) this.anchorPane.getScene().getWindow()).hide();
         FXMLLoader fxmlLoader = new FXMLLoader(
@@ -199,7 +204,7 @@ public class FXMLDocumentController implements Initializable {
                 MsgBox.plain(typingLetter);
             } else { // Will type.
                 try {
-                    System.out.println("これからタイプ"+typingLetter);
+                    System.out.println("これからタイプ" + typingLetter);
                     this.FXMLRobotGrandPanelController.doTyping(typingLetter);
                 } catch (Exception ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,7 +220,7 @@ public class FXMLDocumentController implements Initializable {
         tVdata.getSelectionModel().select(++i);
         tVdata.refresh();
         tVdata.scrollTo(i);
-        if(i==tVdata.getItems().size()){
+        if (i == tVdata.getItems().size()) {
             MsgBox.info("最後の行を処理しました。");
         }
         //btnSendToNext.setVisible(true);
@@ -260,7 +265,7 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println(l);
 
             });
-*/
+             */
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -292,15 +297,14 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    @FXML
+    void clearItems(ActionEvent event) {
+        //error
+        //this.tVdata.itemsProperty().getItems().removeAll(); 
+        data.clear();
+        tVdata.refresh();
+    }
 
-            @FXML
-        void clearItems(ActionEvent event) {
-            //error
-            //this.tVdata.itemsProperty().getItems().removeAll(); 
-            data.clear();
-            tVdata.refresh();
-                    }
-    
     @FXML
     void systemClose(ActionEvent event) {
         //this.anchorPane.getScene().getWindow().getScene();
@@ -318,6 +322,12 @@ public class FXMLDocumentController implements Initializable {
         this.tCtext.setCellValueFactory((new PropertyValueFactory<Member, String>("text")));
 
         this.btnClicEvent();
+     
+        this.btnSendToNext.setOnMouseClicked((MouseEvent e) -> {
+            FXMLDocumentController.this.lastMousePointX = (int) Math.floor(e.getScreenX());
+            FXMLDocumentController.this.lastMousePointY = (int) Math.floor(e.getScreenY());
+        });
+
     }
 
     public void showAgain() {
