@@ -244,8 +244,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     void readText(Path path) {
         try {
-            // List<String> lines = Files.lines(path).collect(Collectors.toList());
-            List<String> lines = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.toList());
+            //lect(Collectors.toList());
             for (int i = 0; i < lines.size(); i++) {
                 data.addAll(new Member(i + 1, "N/T", lines.get(i)));
             }
