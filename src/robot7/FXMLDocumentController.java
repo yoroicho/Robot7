@@ -136,6 +136,7 @@ public class FXMLDocumentController implements Initializable {
     private int lastMousePointX;
     private int lastMousePointY;
 
+    private Path path;
     /*
     public void setSendToNextShow(boolean flg){
             btnSendToNext.setVisible(flg);
@@ -230,7 +231,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     void handleFileOpenAction(ActionEvent event) {
         System.out.println("Open");
-        readText(choiceFile());
+        path = choiceFile();
+        readText(path);
         tVdata.getSelectionModel().select(0); // init select low.
     }
 
@@ -239,6 +241,9 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("File Choice");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
+        if(path!=null){
+                  fileChooser.setInitialDirectory(path.getParent().toFile()); 
+        }
         fileChooser.getExtensionFilters()
                 .addAll(new FileChooser.ExtensionFilter("All file", "*.*", "*"));
         File text = fileChooser.showOpenDialog(null);
