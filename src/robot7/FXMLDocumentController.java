@@ -137,6 +137,7 @@ public class FXMLDocumentController implements Initializable {
     private int lastMousePointY;
 
     private Path path;
+
     /*
     public void setSendToNextShow(boolean flg){
             btnSendToNext.setVisible(flg);
@@ -156,24 +157,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("Selectded now " + i);
         Mouse.mouseClick(Integer.parseInt(this.gettFPointX().getText()),
                 Integer.parseInt(this.gettFPointY().getText()));
-        /*
-        try {
-  
-            //Keyboard keyboard = new Keyboard();
-            String typingLetter;
-            if (chbEnter.isSelected()) { // with enter.
-                typingLetter = tVdata.getSelectionModel().getSelectedItem().getText()
-                        .concat("\n");
-            } else { // no enter.
-                typingLetter = tVdata.getSelectionModel().getSelectedItem().getText();
-            }
-            //keyboard.doTyping(typingLetter); // Type start.
-        } catch (Exception ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         */
-        // const now
-        //((Stage) this.anchorPane.getScene().getWindow()).hide();
+
         FXMLLoader fxmlLoader = new FXMLLoader(
                 getClass().getResource("/FXMLRobotUty/FXMLRobotGrandPanel.fxml"));
         Parent root;
@@ -204,15 +188,20 @@ public class FXMLDocumentController implements Initializable {
                     && !typingLetter.substring(1, 2).equals("@")) { // Comment.
                 MsgBox.plain(typingLetter);
             } else { // Will type.
-                try {
-                    System.out.println("これからタイプ" + typingLetter);
-                    this.FXMLRobotGrandPanelController.doTyping(typingLetter);
-                } catch (Exception ex) {
-                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                System.out.println("これからタイプ" + typingLetter);
+                btnSendToNext.setDisable(true);
+                btnSendToNext.setVisible(false);
+                ((Stage) this.anchorPane.getScene().getWindow()).setResizable(false);
+                System.out.println("タイプ終わり"
+                        + FXMLRobotGrandPanelController.doTyping(typingLetter));
+                ((Stage) this.anchorPane.getScene().getWindow()).setResizable(true);
+                btnSendToNext.setVisible(true);
+                btnSendToNext.setDisable(false);
+                btnSendToNext.requestFocus();
             }
-            //((Stage) this.anchorPane.getScene().getWindow()).show();
         } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -233,7 +222,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("Open");
         path = choiceFile();
         readText(path);
-        tVdata.getSelectionModel().select(0); // init select low.
+        tVdata.getSelectionModel().select(1); // init select first low.
     }
 
     @FXML
@@ -241,8 +230,8 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("File Choice");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
-        if(path!=null){
-                  fileChooser.setInitialDirectory(path.getParent().toFile()); 
+        if (path != null) {
+            fileChooser.setInitialDirectory(path.getParent().toFile());
         }
         fileChooser.getExtensionFilters()
                 .addAll(new FileChooser.ExtensionFilter("All file", "*.*", "*"));
@@ -256,6 +245,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             // List<String> lines = Files.lines(path).collect(Collectors.toList());
             List<String> lines = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.toList());
+            data.addAll(new Member(0,"FILE",path.getFileName().toString()));
             for (int i = 0; i < lines.size(); i++) {
                 data.addAll(new Member(i + 1, "N/T", lines.get(i)));
             }
@@ -327,16 +317,18 @@ public class FXMLDocumentController implements Initializable {
         this.tCtext.setCellValueFactory((new PropertyValueFactory<Member, String>("text")));
 
         this.btnClicEvent();
-     
+
         this.btnSendToNext.setOnMouseClicked((MouseEvent e) -> {
             FXMLDocumentController.this.lastMousePointX = (int) Math.floor(e.getScreenX());
             FXMLDocumentController.this.lastMousePointY = (int) Math.floor(e.getScreenY());
         });
 
+        this.tVdata.getSelectionModel().
+        
     }
-
+/*
     public void showAgain() {
         ((Stage) this.anchorPane.getScene().getWindow()).setIconified(false);
     }
-
+*/
 }

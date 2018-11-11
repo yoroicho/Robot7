@@ -56,11 +56,12 @@ public class FXMLRobotGrandPanelController implements Initializable {
     }
 
     @FXML
-    public void doTyping(String letter) throws Exception {
+    public boolean doTyping(String letter) throws Exception {
         dontPushEnter = false;
         FXMLRobotGrandPanelController keyboard = new FXMLRobotGrandPanelController();
         robot.delay(500);
         keyboard.type(letter);
+        return true;
         //((Stage) anchorPane.getScene().getWindow()).hide();
     }
 
