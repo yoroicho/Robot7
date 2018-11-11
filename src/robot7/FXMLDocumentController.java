@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -323,8 +324,13 @@ public class FXMLDocumentController implements Initializable {
             FXMLDocumentController.this.lastMousePointY = (int) Math.floor(e.getScreenY());
         });
 
-        this.tVdata.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);.getSelectedIndex()
-        
+        tVdata.selectionModelProperty().addListener((Observable observable) -> {
+            if (tVdata.getSelectionModel() != null) { // これ必要
+                if(tVdata.getSelectionModel().getSelectedIndex()==0){
+                  tVdata.getSelectionModel().select(1); // init select first low.
+                }
+                 }
+        });
     }
 /*
     public void showAgain() {
