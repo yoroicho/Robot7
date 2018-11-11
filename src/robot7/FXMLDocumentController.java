@@ -223,7 +223,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("Open");
         path = choiceFile();
         readText(path);
-        tVdata.getSelectionModel().select(1); // init select first low.
+        tVdata.getSelectionModel().select(0); // init select first low.
     }
 
     @FXML
@@ -246,7 +246,11 @@ public class FXMLDocumentController implements Initializable {
         try {
             // List<String> lines = Files.lines(path).collect(Collectors.toList());
             List<String> lines = Files.lines(path, StandardCharsets.UTF_8).collect(Collectors.toList());
-            data.addAll(new Member(0,"FILE",path.getFileName().toString()));
+            if (lines.get(0).startsWith("\uFEFF")) {
+                lines.set(0, lines.get(0).substring(1));
+            }
+
+//data.addAll(new Member(0,"FILE",path.getFileName().toString()));
             for (int i = 0; i < lines.size(); i++) {
                 data.addAll(new Member(i + 1, "N/T", lines.get(i)));
             }
@@ -323,18 +327,19 @@ public class FXMLDocumentController implements Initializable {
             FXMLDocumentController.this.lastMousePointX = (int) Math.floor(e.getScreenX());
             FXMLDocumentController.this.lastMousePointY = (int) Math.floor(e.getScreenY());
         });
-
+/*
         tVdata.selectionModelProperty().addListener((Observable observable) -> {
             if (tVdata.getSelectionModel() != null) { // これ必要
-                if(tVdata.getSelectionModel().getSelectedIndex()==0){
-                  tVdata.getSelectionModel().select(1); // init select first low.
+                if (tVdata.getSelectionModel().getSelectedIndex() == 0) {
+                    tVdata.getSelectionModel().select(1); // init select first low.
                 }
-                 }
+            }
         });
-    }
-/*
+        */
+        }
+    /*
     public void showAgain() {
         ((Stage) this.anchorPane.getScene().getWindow()).setIconified(false);
     }
-*/
+     */
 }
