@@ -323,7 +323,7 @@ public class FXMLDocumentController implements Initializable {
             FXMLDocumentController.this.lastMousePointY = (int) Math.floor(e.getScreenY());
         });
 
-        this.tVdata.getSelectionModel().
+        this.tVdata.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);.getSelectedIndex()
         
     }
 /*
