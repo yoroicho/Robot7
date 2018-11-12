@@ -5,29 +5,18 @@
  */
 package FXMLRobotUty;
 
-import com.sun.javafx.runtime.SystemProperties;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.*;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import robot7.MsgBox;
-import robot7.Robot7;
 
 /**
  * FXML Controller class
@@ -60,7 +49,13 @@ public class FXMLRobotGrandPanelController implements Initializable {
         dontPushEnter = false;
         FXMLRobotGrandPanelController keyboard = new FXMLRobotGrandPanelController();
         robot.delay(500);
-        keyboard.type(letter);
+        try {
+            keyboard.type(letter);
+        } catch (IllegalArgumentException i) {
+            MsgBox.error("マルチバイトなどのタイプ不能文字 " + i + " です。"
+                    + "この行のこれ以降のタイプを中止します。");
+            return false;
+        }
         return true;
         //((Stage) anchorPane.getScene().getWindow()).hide();
     }
@@ -382,9 +377,8 @@ public class FXMLRobotGrandPanelController implements Initializable {
                 doType(VK_SPACE);
                 break;
             default:
-                System.out.println("now "+ String.valueOf(character));
-                MsgBox.error("Cannot type character " + character);
-                throw new IllegalArgumentException("Cannot type character " + character);
+                System.out.println("now " + String.valueOf(character));
+                throw new IllegalArgumentException(String.valueOf(character));
         }
     }
 

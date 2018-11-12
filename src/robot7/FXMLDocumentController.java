@@ -193,7 +193,7 @@ public class FXMLDocumentController implements Initializable {
                 btnSendToNext.setDisable(true);
                 btnSendToNext.setVisible(false);
                 ((Stage) this.anchorPane.getScene().getWindow()).setResizable(false);
-                System.out.println("タイプ終わり"
+                System.out.println("行タイプ結果"
                         + FXMLRobotGrandPanelController.doTyping(typingLetter));
                 ((Stage) this.anchorPane.getScene().getWindow()).setResizable(true);
                 btnSendToNext.setVisible(true);
